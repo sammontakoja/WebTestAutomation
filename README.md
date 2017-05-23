@@ -7,5 +7,5 @@
 - **WhenFindingButton.java** will run button related tests against index.html.
 
 ## Libraries
-net.sourceforge.htmlunit:htmlunit:2.26
-junit:junit:4.12
+- net.sourceforge.htmlunit:htmlunit:2.26
+- junit:junit:4.12
