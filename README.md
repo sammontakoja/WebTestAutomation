@@ -5,6 +5,7 @@
 - **HtmlServer.java** for serving index.html at localhost:PORT/view.
 - **HtmlServerStarter.java** for starting HtmlServer listening random free port.
 - **WhenFindingButton.java** will run button related tests against index.html.
+- **WhenFindingSpecialContent.java** will show how to run UI calls with custom request headers.
 
 ## Libraries
 - net.sourceforge.htmlunit:htmlunit:2.26

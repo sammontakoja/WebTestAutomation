@@ -1,3 +1,4 @@
+import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
 
@@ -24,8 +25,16 @@ public class HtmlServer {
     private HttpServer withHTMLResponse(int htmlPort) {
         try {
             HttpServer httpServer = HttpServer.create(new InetSocketAddress(htmlPort), 0);
-            httpServer.createContext("/view", httpExchange -> writeIndexHtmlToResponse(httpExchange));
+            httpServer.createContext("/view", httpExchange -> {
+
+                if (specialHeaderFound(httpExchange.getRequestHeaders()))
+                    writeSpecialContentToResponse(httpExchange);
+                else
+                    writeIndexHtmlToResponse(httpExchange);
+            });
+
             return httpServer;
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -35,6 +44,18 @@ public class HtmlServer {
         httpExchange.sendResponseHeaders(200, responseBody.length);
         OutputStream os = httpExchange.getResponseBody();
         os.write(responseBody);
+        os.close();
+    }
+
+    private boolean specialHeaderFound(Headers headers) {
+        return headers.containsKey("special_content");
+    }
+
+    private void writeSpecialContentToResponse(HttpExchange httpExchange) throws IOException {
+        String specialContent = "Jippii!";
+        httpExchange.sendResponseHeaders(200, specialContent.getBytes().length);
+        OutputStream os = httpExchange.getResponseBody();
+        os.write(specialContent.getBytes());
         os.close();
     }
 
