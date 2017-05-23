@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Button view</title>
+</head>
+<body>
+
+<script>
+
+    function showSendButton() {
+        const button = document.createElement("BUTTON");
+
+        button.setAttribute("id", "send_button");
+
+        button.addEventListener("click", function () {
+            const text = document.createTextNode("Button clicked!")
+            document.body.appendChild(text);
+
+        });
+
+        document.body.appendChild(button);
+    }
+
+    setTimeout(showSendButton, 2000);
+
+</script>
+
+</body>
+</html>
