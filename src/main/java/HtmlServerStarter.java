@@ -4,11 +4,12 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class HtmlServerStarter {
 
-    public final HtmlServer htmlServer;
+    private final HtmlServer htmlServer;
+    public final int port;
 
     public HtmlServerStarter() {
-        int htmlServerPort = nextFreeRandomPort();
-        this.htmlServer = new HtmlServer(htmlServerPort);
+        this.port = nextFreeRandomPort();
+        this.htmlServer = new HtmlServer(this.port);
         this.htmlServer.start();
     }
 
